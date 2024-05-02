@@ -8,7 +8,5 @@ import org.springframework.stereotype.Service;
 @Repository
 @Service
 public interface CategoryRepository extends CrudRepository<Category,Long> {
-
     Category getByName(String name);
-
 }
