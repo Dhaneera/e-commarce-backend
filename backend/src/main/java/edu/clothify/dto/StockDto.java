@@ -25,7 +25,7 @@ public class StockDto {
     @NotBlank(message = "price is null")
     private Double price;
     @NotBlank(message = "contact is null")
-    @Size(min = 10,message = "Quantity missing digits")
+    @Size(min = 3,message = "Quantity missing digits")
     private int qty;
     private Product product;
 
