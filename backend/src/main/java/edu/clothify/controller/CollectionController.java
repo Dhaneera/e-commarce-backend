@@ -44,7 +44,7 @@ public class CollectionController {
     }
     @GetMapping("/get/name/{name}")
     public CollectionDto getCollectionByName(@PathVariable String name){
-        return collectionService.getCollectionByName(name);
+        return collectionService.getCategoryByName(name);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
