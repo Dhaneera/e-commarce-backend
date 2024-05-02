@@ -5,9 +5,9 @@ import edu.clothify.dto.CategoryDto;
 import java.util.List;
 
 public interface CategoryService {
-    boolean saveCategory(CategoryDto categoryDto);
+    public boolean saveCategory(CategoryDto categoryDto);
 
-    List<CategoryDto> getAllCategories();
+    public List<CategoryDto> getAllCategories();
 
     CategoryDto getCategoryByName(String name);
 

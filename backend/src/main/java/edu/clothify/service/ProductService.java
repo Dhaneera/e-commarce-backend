@@ -15,7 +15,4 @@ public interface ProductService {
 
     ProductDto getProductByName(String name);
 
-    List<ProductDto> getProductByStock(Long StockId);
-    public Boolean deleteProduct(Long id);
-
 }
