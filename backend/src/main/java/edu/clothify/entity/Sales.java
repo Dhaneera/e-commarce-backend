@@ -6,24 +6,26 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-import java.util.List;
-
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "sub_category")
-public class SubCategory {
+@Table(name = "Sales")
+public class Sales {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sub_category_id")
     private Long id;
 
-    @Column(name = "Sub Category Name", nullable = false)//join
-    private String name;
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
-    private List<Product> products;
+    @Column(name = "Total Price")
+    private  String price;
+
+    @Column(name = "Total Quantity")
+    private String qty;
+
 }

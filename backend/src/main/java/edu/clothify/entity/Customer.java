@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
 @Entity
 @Builder
 @NoArgsConstructor
@@ -22,10 +23,6 @@ public class Customer {
 
     @Column(name = "Email")
     private String mail;
-
-    @OneToOne(mappedBy = "customerId")
-    @JsonIgnore
-    private Cart cart;
 
     @Column(name = "UserName")
     private String name ;
@@ -41,13 +38,4 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<BillingInfo> billingInfo;
-
-    public Customer(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Customer(String customerName) {
-        this.name =customerName;
-    }
 }

@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Builder
 @NoArgsConstructor
@@ -21,10 +22,10 @@ public class Stock {
 
     @ManyToOne
     @JoinColumn(name = "productId")
+    @JsonIgnore
     private Product product;
 
-    @OneToOne(mappedBy = "stockId")
-    @JsonIgnore
+    @OneToOne(mappedBy = "stock")
     private Cart cart;
 
     @Column(name = "Color")
@@ -38,9 +39,5 @@ public class Stock {
 
     @Column(name = "quantity")
     private int qty;
-
-    public Stock(Long id) {
-        this.id = id;
-    }
 
 }

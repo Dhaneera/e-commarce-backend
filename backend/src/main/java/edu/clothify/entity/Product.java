@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 
 @Entity
@@ -23,7 +22,7 @@ public class Product {
     @Column(name = "product_name")
     private String name;
 
-    @Column(name = "total_description")
+    @Column(name = "total_description",length = 999999)
     private  String desc;
 
     @Column(name = "price")
@@ -36,15 +35,19 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "sub_category_id")
+    @JsonIgnore
     private SubCategory subCategory;
 
     @ManyToOne
     @JoinColumn(name = "collection_id")
+    @JsonIgnore
     private Collection collection;
 
     @Column(name = "sold_count")
     private int soldCount;
 
+    @OneToOne(mappedBy = "product",cascade = CascadeType.ALL)
+    private Sales sales;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Stock> stocks;

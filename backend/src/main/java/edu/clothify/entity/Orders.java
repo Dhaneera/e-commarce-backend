@@ -1,6 +1,5 @@
 package edu.clothify.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.clothify.util.converter.OrderStatusConverter;
 import edu.clothify.util.enums.OrderStatus;
 import jakarta.persistence.*;
@@ -8,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigInteger;
 
 
 @Entity
@@ -21,42 +22,42 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @OneToOne
     @JoinColumn(name = "cart_id")
-    @JsonIgnore
     private Cart cart;
 
-    @Column(name = "Address")
+    @Column(name = "Address" , nullable = false)
     private String address;
 
-    @Column(name ="Contact")
+    @Column(name ="Contact" , nullable = false)
     private String phone;
 
-    @Column(name ="Tax")
-    private Double tax;
+    @Column(name ="Tax" , nullable = false)
+    private BigInteger tax;
 
-    @Column(name ="Delivery Charge")
-    private Double charge;
+    @Column(name ="Delivery Charge" , nullable = false)
+    private String charge;
 
-    @Column(name = "Land Code")
-    private String zipCode;
+    @Column(name = "Land Code" , nullable = false)
+    private Integer zipCode;
 
-    @Column(name = "Order Total")
-    private Double tot;
+    @Column(name = "Order Total" , nullable = false)
+    private Long tot;
 
-    @Column(name = "City")
+    @Column(name = "City" , nullable = false)
     private String city;
 
     @OneToOne(mappedBy = "orders")
-    @JsonIgnore
     private BillingInfo billingInfo;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
     private Customer customer;
 
+    @OneToOne(mappedBy = "orders")
+    private Payment payment;
+
+    @Column(name = "Delivery Status" , nullable = false)
     @Convert(converter =  OrderStatusConverter.class)
     private OrderStatus status;
 

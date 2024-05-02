@@ -20,38 +20,16 @@ public class Cart {
     @OneToOne
     @JoinColumn(name = "stock_id")
     @JsonIgnore
-    private Stock stockId;
-
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customerId;
+    private Stock stock;
 
     @Column(name = "Quantity")
     private int qty;
 
     @Column(name = "Product Total")
-    private Double productTot;
+    private int productTot;
 
     @OneToOne(mappedBy = "cart")
     private Orders orders;
 
     private Boolean completed;
-
-    public Cart(Long id) { // Add the missing constructor
-        this.id = id;
-    }
-
-
-    public Cart(Long id, Stock stockId, int qty, boolean completed, Double productTot) {
-        this.id = id;
-        this.qty = qty;
-        this.completed = completed;
-        this.stockId = stockId;
-        this.productTot = productTot;
-    }
-
-    public Cart(long id, boolean completed) {
-        this.id=id;
-        this.completed=completed;
-    }
 }
