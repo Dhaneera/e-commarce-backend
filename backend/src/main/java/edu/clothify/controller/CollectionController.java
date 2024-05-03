@@ -24,12 +24,12 @@ public class CollectionController {
     CollectionService collectionService;
 
     @PostMapping("/add")
-    public boolean addSubcategory(@Valid @RequestBody CollectionDto collectionDto){
+    public boolean addCollection(@Valid @RequestBody CollectionDto collectionDto){
         return collectionService.saveCollection(collectionDto);
     }
 
     @GetMapping("/getAll")
-    public List<CollectionDto> getAllSubCategories(){
+    public List<CollectionDto> getAllCollection(){
         return collectionService.getAllCollection();
     }
 
@@ -44,7 +44,7 @@ public class CollectionController {
     }
     @GetMapping("/get/name/{name}")
     public CollectionDto getCollectionByName(@PathVariable String name){
-        return collectionService.getCategoryByName(name);
+        return collectionService.getCollectionByName(name);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

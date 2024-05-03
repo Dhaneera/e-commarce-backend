@@ -15,22 +15,23 @@ import java.util.List;
 @Service
 public class CollectionServiceImpl implements CollectionService {
     @Autowired
-    private CollectionRepository collectionRepository;
+    CollectionRepository collectionRepository;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    ObjectMapper objectMapper;
     @Override
     public boolean saveCollection(CollectionDto collectionDto) {
-        Collection collection=objectMapper.convertValue(collectionDto, Collection.class);
+        Collection collection=objectMapper.convertValue(collectionDto,Collection.class);
         Collection isSaved=collectionRepository.save(collection);
         return isSaved.getId()!=null;
     }
 
+
     @Override
     public List<CollectionDto> getAllCollection() {
         Iterable<Collection> collections =collectionRepository.findAll();
-        Iterator<Collection> collectionIterator =collections.iterator();
         List<CollectionDto> collectionDtoList= new ArrayList<>();
+        Iterator<Collection> collectionIterator =collections.iterator();
         while (collectionIterator.hasNext()){
             Collection collection=collectionIterator.next();
             CollectionDto collectionDto=objectMapper.convertValue(collection,CollectionDto.class);
@@ -61,7 +62,11 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public CollectionDto getCollectionByName(String name) {
-        Collection collection=collectionRepository.getByName(name);
-        return objectMapper.convertValue(collection,CollectionDto.class);
+        try {
+            Collection collection=collectionRepository.getByName(name);
+            return objectMapper.convertValue(collection,CollectionDto.class);
+        }catch (Exception exception){
+            return null;
+        }
     }
 }

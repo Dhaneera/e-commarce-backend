@@ -92,7 +92,6 @@ public class CollectionRepositoryTest {
             //Then
             Assertions.assertEquals(collection1.getId(),saved.getId());
 
-
         }
 
         @Test
