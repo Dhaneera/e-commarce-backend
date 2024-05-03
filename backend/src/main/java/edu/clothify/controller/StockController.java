@@ -1,10 +1,8 @@
 package edu.clothify.controller;
 
-import edu.clothify.config.ResourceNotFoundException;
 import edu.clothify.dto.StockDto;
 import edu.clothify.entity.Stock;
 import edu.clothify.service.StockService;
-import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -33,7 +31,9 @@ public class StockController {
     public List<Stock> listStock(@RequestParam String size, @RequestParam Long id) {
         List<Stock> stockDTOList = stockService.getStockAccordingToSizeAndProduct(size,id);
         if (stockDTOList.isEmpty()){
-            throw new ResourceNotFoundException("Not Valid");
+            List list=new ArrayList();
+            list.add("not valid");
+            return list;
         }
         return stockDTOList;
     }
