@@ -18,8 +18,10 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("/cart")
 public class CartController {
+
     @Autowired
     private CartService cartService;
+
     @PostMapping("/add")
     public boolean addCart(@RequestBody CartDto cartDto){
         return cartService.addCart(cartDto);
@@ -30,14 +32,19 @@ public class CartController {
         return cartService.getAllCartDetails();
     }
 
-    @PutMapping("/update/{id}")
-    public Cart updateCart(@PathVariable Long id, @RequestBody CartDto cartDto) {
-        return cartService.upadateCart(id,cartDto);
+    @PutMapping("/update/add/{id}")
+    public Boolean updateCart(@PathVariable Long id) {
+        return cartService.updateAddCart(id);
     }
 
-    @PutMapping("/delete/{id}")
+    @PutMapping("/update/sub/{id}")
+    public Boolean updateSubCart(@PathVariable Long id){
+        return cartService.updateSubCart(id);
+    }
+
+    @DeleteMapping("/delete/{id}")
     public Boolean updateStatus(@PathVariable long id){
-        return cartService.updateStatus(id);
+        return cartService.deleteItemById(id);
     }
 
     @GetMapping("/get/{id}")
@@ -45,9 +52,14 @@ public class CartController {
         return cartService.getCartById(id);
     }
 
+    @GetMapping("/get/customer/{id}")
+    public List<CartDto> getCartByCustomer(@PathVariable long id){
+        return cartService.getCartByCustomer(id);
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String,String> error(MethodArgumentNotValidException exception){
+    public Map<String,String> handleValidationExceptions(MethodArgumentNotValidException exception){
         Map<String, String> map=new HashMap<>();
         List<ObjectError> list=exception.getBindingResult().getAllErrors();
         for(ObjectError item:list) {

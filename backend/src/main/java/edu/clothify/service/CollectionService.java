@@ -12,7 +12,8 @@ public interface CollectionService {
 
     boolean deleteCollectionById(Long id);
 
-    CollectionDto getCollectionByName(String name);
+    CollectionDto getCategoryByName(String name);
 
     boolean saveCollection(CollectionDto collectionDto);
+    CollectionDto getCollectionByName(String name);
 }

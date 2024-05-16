@@ -24,12 +24,12 @@ public class CollectionController {
     CollectionService collectionService;
 
     @PostMapping("/add")
-    public boolean addCollection(@Valid @RequestBody CollectionDto collectionDto){
+    public boolean addSubcategory(@Valid @RequestBody CollectionDto collectionDto){
         return collectionService.saveCollection(collectionDto);
     }
 
     @GetMapping("/getAll")
-    public List<CollectionDto> getAllCollection(){
+    public List<CollectionDto> getAllSubCategories(){
         return collectionService.getAllCollection();
     }
 
@@ -40,11 +40,12 @@ public class CollectionController {
 
     @DeleteMapping("/delete/{id}")
     public boolean deleteCollectionById(@PathVariable Long id){
-        return collectionService.deleteCollectionById(id);
+        boolean isDeleted= collectionService.deleteCollectionById(id);
+        return isDeleted;
     }
     @GetMapping("/get/name/{name}")
     public CollectionDto getCollectionByName(@PathVariable String name){
-        return collectionService.getCollectionByName(name);
+        return collectionService.getCategoryByName(name);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
